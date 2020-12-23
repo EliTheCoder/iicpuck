@@ -45,8 +45,18 @@ function update() {
 	cids.splice(cids.indexOf(puck.id), 1);
 
 	// Constantly updating the variables full of all the player's coords
-	pos = cids.map(cid => {
-		return IIC.getPosition(cid);
+	pos = cids
+		.map(cid => {
+			return IIC.getPosition(cid);
+		})
+		.filter(a => a);
+
+	// Player collisions
+	pos.forEach(a => {
+		if (distance(puck.x, puck.y, a.x, a.y) < 20) {
+			puck.vx = puck.x - a.x;
+			puck.vy = puck.y - a.y;
+		}
 	});
 
 	// Constantly updating the player's x and y based on the direction they're moving
@@ -83,3 +93,7 @@ function update() {
 }
 
 setInterval(update, refreshRate);
+
+function distance(x1, y1, x2, y2) {
+	return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+}
