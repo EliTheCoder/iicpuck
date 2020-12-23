@@ -58,7 +58,7 @@ function update() {
 
 	// Constantly updating the variables full of all the player's coords
 	allxs = [];
-	IIC.getConnectedIds().forEach(function (sid) {
+	IIC.getConnectedIds().forEach(sid => {
 		allxs.push(IIC.getPosition(sid).x);
 		allys.push(IIC.getPosition(sid).y);
 	});
@@ -70,4 +70,5 @@ function update() {
 	// Constantly updating the player's coords w/ the x and y variables
 	IIC.setPosition(x, y);
 }
+
 setInterval(update, refreshRate);
