@@ -22,19 +22,13 @@ const startingY = 100; // 100 - Flag starts at Y value 100
 // Don't change any of this unless you know what you're doing
 //         V V V V V V V V V V V V V V V V V V V V V v
 
-// ID of the player
-const id = IIC.getId();
-
-// Defining the x and y values as the set ones above
-let x = startingX;
-let y = startingY;
-
-// Defining the velocity (speed and direction)
-// The flag isn't moving anywhere yet so they're both set to nothing
-// Although, if the speed is 0, the direction could be anything, but I pick 0 because it means 'nothing'
-let velocity = {
-	speed: 0,
-	direction: 0
+// Defining the puck object
+let puck = {
+	id: IIC.getId(),
+	x: startingX,
+	y: startingY,
+	vx: 0,
+	vy: 0
 };
 
 // Defining a few variables used in the update function
@@ -47,7 +41,7 @@ function update() {
 	cids = IIC.getConnectedIds();
 
 	// And removing the player's own ID
-	cids.splice(cids.indexOf(id), 1);
+	cids.splice(cids.indexOf(puck.id), 1);
 
 	// Constantly updating the variables full of all the player's coords
 	pos = cids.map(cid => {
@@ -55,11 +49,14 @@ function update() {
 	});
 
 	// Constantly updating the player's x and y based on the direction they're moving
-	x += velocity.speed * Math.cos(velocity.direction);
-	y += velocity.speed * Math.sin(velocity.direction);
+	puck.x += puck.vx;
+	puck.y += puck.vy;
 
 	// Constantly updating the player's coords w/ the x and y variables
-	IIC.setPosition(x, y);
+	IIC.setPosition(puck.x, puck.y);
+
+	// Make a wave (left click) at the new position
+	IIC.makeWave(puck.x, puck.y);
 }
 
 setInterval(update, refreshRate);
