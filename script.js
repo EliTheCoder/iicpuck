@@ -15,9 +15,10 @@ __/\\\\\\\\\\\__/\\\\\\\\\\\________/\\\\\\\\\____________/\\\\\\\\\\\\\________
 // Feel free to change these:
 //      V V V V V V V
 
-const refreshRate = 100; // 100 - Updates position every 100 milliseconds
+const refreshRate = 50; // 100 - Updates position every 50 milliseconds
 const startingX = 100; // 100 - Flag starts at X value 100
 const startingY = 100; // 100 - Flag starts at Y value 100
+const friction = 1.02;
 
 // Don't change any of this unless you know what you're doing
 //         V V V V V V V V V V V V V V V V V V V V V v
@@ -27,8 +28,8 @@ let puck = {
 	id: IIC.getId(),
 	x: startingX,
 	y: startingY,
-	vx: 0,
-	vy: 0
+	vx: 20,
+	vy: 13
 };
 
 // Defining a few variables used in the update function
@@ -51,6 +52,28 @@ function update() {
 	// Constantly updating the player's x and y based on the direction they're moving
 	puck.x += puck.vx;
 	puck.y += puck.vy;
+
+	// Friction
+	puck.x /= friction;
+	puck.y /= friction;
+
+	// Wall collisions
+	if (puck.x < 0) {
+		puck.x = 0;
+		puck.vx = -puck.vx;
+	}
+	if (puck.x > window.innerWidth) {
+		puck.x = window.innerWidth;
+		puck.vx = -puck.vx;
+	}
+	if (puck.y < 0) {
+		puck.y = 0;
+		puck.vy = -puck.vy;
+	}
+	if (puck.y > window.innerHeight) {
+		puck.y = window.innerHeight;
+		puck.vy = -puck.vy;
+	}
 
 	// Constantly updating the player's coords w/ the x and y variables
 	IIC.setPosition(puck.x, puck.y);
