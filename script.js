@@ -56,7 +56,7 @@ function update() {
 
 	// Player collisions
 	pos.forEach(a => {
-		if (distance(puck.x, puck.y, a.x, a.y) < 20) {
+		if (distance(puck.x, puck.y, a.x, a.y) < 30) {
 			puck.vx = puck.x - a.x;
 			puck.vy = puck.y - a.y;
 		}
