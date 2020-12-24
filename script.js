@@ -39,9 +39,6 @@ let pos = [];
 // Disabling rate limit
 limiters.click = ratelimit(rawSend, 0);
 
-// Increasing ghost maximum
-user.live.ghost_max = "1000000";
-
 // Function that gets updated at the refreshRate
 function update() {
 	// Put the IDs of all the connected players in a variable
