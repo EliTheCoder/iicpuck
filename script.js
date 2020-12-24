@@ -18,7 +18,7 @@ __/\\\\\\\\\\\__/\\\\\\\\\\\________/\\\\\\\\\____________/\\\\\\\\\\\\\________
 const refreshRate = 50; // 100 - Updates position every 50 milliseconds
 const startingX = 100; // 100 - Flag starts at X value 100
 const startingY = 100; // 100 - Flag starts at Y value 100
-const friction = 1.02;
+const friction = 1.02; // 1.02 - Puck's velocity decreases by 98% every update
 
 // Don't change any of this unless you know what you're doing
 //         V V V V V V V V V V V V V V V V V V V V V v
@@ -38,6 +38,8 @@ let pos = [];
 
 // Disabling rate limit
 limiters.click = ratelimit(rawSend, 0);
+
+//
 
 // Function that gets updated at the refreshRate
 function update() {
