@@ -95,7 +95,7 @@ function update() {
 	IIC.makeWave(puck.x, puck.y);
 
 	// Rotate 1 degree
-	IIC.setAngle(IIC.getAngle() + 1);
+	IIC.setAngle(IIC.getAngle() + Math.PI / 180);
 }
 
 setInterval(update, refreshRate);
