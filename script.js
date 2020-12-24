@@ -70,8 +70,8 @@ function update() {
 	puck.y += puck.vy;
 
 	// Friction
-	puck.x /= friction;
-	puck.y /= friction;
+	puck.vx /= friction;
+	puck.vy /= friction;
 
 	// Wall collisions
 	if (puck.x < 0) {
