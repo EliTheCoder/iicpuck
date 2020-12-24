@@ -19,6 +19,7 @@ const refreshRate = 50; // 100 - Updates position every 50 milliseconds
 const startingX = 100; // 100 - Flag starts at X value 100
 const startingY = 100; // 100 - Flag starts at Y value 100
 const friction = 1.02; // 1.02 - Puck's velocity decreases by 98% every update
+const ghostWait = 10; // 10 - Create a ghost every 10 updates
 
 // Don't change any of this unless you know what you're doing
 //         V V V V V V V V V V V V V V V V V V V V V v
@@ -39,7 +40,8 @@ let pos = [];
 // Disabling rate limit
 limiters.click = ratelimit(rawSend, 0);
 
-//
+// Defining variable for ghost waitinc
+let ghostTimer = ghostWait;
 
 // Function that gets updated at the refreshRate
 function update() {
@@ -97,7 +99,11 @@ function update() {
 	IIC.makeWave(puck.x, puck.y);
 
 	// Make a ghost (right click) at the new position
-	IIC.makeGhost(puck.x, puck.y);
+	ghostTimer--;
+	if (ghostTimer <= 0) {
+		ghostTimer = ghostWait;
+		IIC.makeGhost(puck.x, puck.y);
+	}
 
 	// Rotate 2 degrees
 	IIC.setAngle(IIC.getAngle() + Math.PI / 90);
