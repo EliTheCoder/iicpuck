@@ -39,6 +39,9 @@ let pos = [];
 // Disabling rate limit
 limiters.click = ratelimit(rawSend, 0);
 
+// Increasing ghost maximum
+user.live.ghost_max = "1000000";
+
 // Function that gets updated at the refreshRate
 function update() {
 	// Put the IDs of all the connected players in a variable
@@ -93,6 +96,9 @@ function update() {
 
 	// Make a wave (left click) at the new position
 	IIC.makeWave(puck.x, puck.y);
+
+	// Make a ghost (right click) at the new position
+	IIC.makeGhost(puck.x, puck.y);
 
 	// Rotate 2 degrees
 	IIC.setAngle(IIC.getAngle() + Math.PI / 90);
