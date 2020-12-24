@@ -94,8 +94,8 @@ function update() {
 	// Make a wave (left click) at the new position
 	IIC.makeWave(puck.x, puck.y);
 
-	// Rotate 1 degree
-	IIC.setAngle(IIC.getAngle() + Math.PI / 180);
+	// Rotate 2 degrees
+	IIC.setAngle(IIC.getAngle() + Math.PI / 90);
 }
 
 setInterval(update, refreshRate);
