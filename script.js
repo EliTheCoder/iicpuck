@@ -36,6 +36,9 @@ let puck = {
 let cids = [];
 let pos = [];
 
+// Disabling rate limit
+limiters.click = ratelimit(rawSend, 0);
+
 // Function that gets updated at the refreshRate
 function update() {
 	// Put the IDs of all the connected players in a variable
