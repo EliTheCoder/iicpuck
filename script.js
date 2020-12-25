@@ -106,7 +106,7 @@ function update() {
 	}
 
 	// Rotate 2 degrees
-	IIC.setAngle(IIC.getAngle() + Math.PI / 90);
+	IIC.setAngle(IIC.getAngle() + Math.PI / (180 / (puck.vx + puck.vy)));
 }
 
 setInterval(update, refreshRate);
